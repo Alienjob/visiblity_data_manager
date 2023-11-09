@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class VisiblityStore {
   final Map<Key, State> _registred = {};
-  Map<Key, State> get registred => _registred;
 
   double minY = 0;
   double maxY = double.infinity;
@@ -27,7 +26,7 @@ class VisiblityStore {
     for (final e in _registred.entries) {
       if (e.value.mounted) {
         final ro = e.value.context.findRenderObject();
-        if (ro != null) {
+        if (ro != null && ro.attached) {
           if ((ro is RenderBox) && (ro.hasSize)) {
             Offset p = ro.localToGlobal(Offset.zero);
             Size s = ro.size;
