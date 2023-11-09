@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class VisiblityStore {
   final Map<double, State> _registred = {};
+  Map<double, State> get registred => _registred;
 
   double minY = 0;
   double maxY = double.infinity;

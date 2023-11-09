@@ -12,10 +12,15 @@ class NumOfVisible extends StatelessWidget {
       home: Scaffold(
         body: VisiblityManager(
           store: store,
+          onChange: (dataStore, visiblyStore) {
+            if(dataStore is NumOfVisibleStore){
+              dataStore.update(visiblyStore.registred.length);
+            }
+          },
           child: ListView(
             children: [
               Card(
-                child: VisibleManageble(
+                child: VisiblityManageble(
                   child: Text(
                     '${store.numOfVisible}',
                   ),

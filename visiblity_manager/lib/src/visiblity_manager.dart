@@ -1,22 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:visiblity_manager/visiblity_data_store.dart';
 import 'package:visiblity_manager/visiblity_manager.dart';
-import 'package:visiblity_manager/visiblity_store.dart';
 
-// Виджет
 class VisiblityManager extends StatefulWidget {
   const VisiblityManager({
     super.key,
     required this.child,
     this.updateFrequency = const Duration(milliseconds: 300),
     required this.store,
+    required this.onChange,
   });
 
   final Widget child;
   final VisiblityDataStore store;
   final Duration updateFrequency;
+  final void Function(VisiblityDataStore dataStore, VisiblityStore visiblyStore)
+      onChange;
 
   @override
   State<VisiblityManager> createState() => _VisiblityManagerState();
@@ -37,6 +37,7 @@ class _VisiblityManagerState extends State<VisiblityManager> {
 
   @override
   void didUpdateWidget(covariant VisiblityManager oldWidget) {
+    widget.onChange(widget.store, _visiblyStore);
     _updateTimer?.cancel();
     _updateTimer = null;
     _updateTimer = Timer.periodic(widget.updateFrequency, (timer) {
@@ -53,6 +54,7 @@ class _VisiblityManagerState extends State<VisiblityManager> {
     return VisiblityNotificator(
       onInit: onInit,
       onDispose: onDispose,
+      store: widget.store,
       child: widget.child,
     );
   }

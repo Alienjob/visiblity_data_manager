@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:visiblity_manager/visiblity_manager.dart';
 
-class VisibleManageble extends StatefulWidget {
-  const VisibleManageble({
+class VisiblityManageble extends StatefulWidget {
+  const VisiblityManageble({
     super.key,
     required this.child,
   });
@@ -10,10 +10,10 @@ class VisibleManageble extends StatefulWidget {
   final Widget child;
 
   @override
-  State<VisibleManageble> createState() => _VisibleManagebleState();
+  State<VisiblityManageble> createState() => _VisiblityManagebleState();
 }
 
-class _VisibleManagebleState extends State<VisibleManageble> {
+class _VisiblityManagebleState extends State<VisiblityManageble> {
   late void Function(double id, State volume, double total) onInit;
   late void Function(double id) onDispose;
 
@@ -34,7 +34,7 @@ class _VisibleManagebleState extends State<VisibleManageble> {
   }
 
   @override
-  void didUpdateWidget(VisibleManageble oldWidget) {
+  void didUpdateWidget(VisiblityManageble oldWidget) {
     super.didUpdateWidget(oldWidget);
     //onInit(widget.id, this, widget.total);
     //_total = widget.total;

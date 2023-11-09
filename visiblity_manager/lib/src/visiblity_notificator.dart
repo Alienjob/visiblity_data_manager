@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visiblity_manager/visiblity_manager.dart';
 
 class VisiblityNotificator extends InheritedWidget {
   const VisiblityNotificator({
@@ -6,11 +7,13 @@ class VisiblityNotificator extends InheritedWidget {
     required this.onInit,
     required this.onDispose,
     required super.child,
+    required this.store,
   });
 
   final void Function(double key, State volume, double total) onInit;
   final void Function(double key) onDispose;
-
+  final VisiblityDataStore store;
+  
   static VisiblityNotificator? maybeOf(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<VisiblityNotificator>();
@@ -24,6 +27,6 @@ class VisiblityNotificator extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(VisiblityNotificator oldWidget) => true;
-    //  oldWidget.maxStaircaseTotal != maxStaircaseTotal;
+  bool updateShouldNotify(VisiblityNotificator oldWidget) => 
+    oldWidget.store.version != store.version;
 }
