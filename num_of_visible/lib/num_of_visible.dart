@@ -13,7 +13,7 @@ class NumOfVisible extends StatelessWidget {
         body: VisiblityManager(
           store: store,
           onChange: (dataStore, visiblyStore) {
-            if(dataStore is NumOfVisibleStore){
+            if (dataStore is NumOfVisibleStore) {
               dataStore.update(visiblyStore.registred.length);
             }
           },
@@ -21,7 +21,32 @@ class NumOfVisible extends StatelessWidget {
             children: [
               Card(
                 child: VisiblityManageble(
-                  child: Text(
+                  key: UniqueKey(),
+                  builder: () => Text(
+                    '${store.numOfVisible}',
+                  ),
+                ),
+              ),
+              Card(
+                child: VisiblityManageble(
+                  key: UniqueKey(),
+                  builder: () => Text(
+                    '${store.numOfVisible}',
+                  ),
+                ),
+              ),
+              Card(
+                child: VisiblityManageble(
+                  key: UniqueKey(),
+                  builder: () => Text(
+                    '${store.numOfVisible}',
+                  ),
+                ),
+              ),
+              Card(
+                child: VisiblityManageble(
+                  key: UniqueKey(),
+                  builder: () => Text(
                     '${store.numOfVisible}',
                   ),
                 ),

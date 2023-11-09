@@ -3,19 +3,19 @@ import 'package:visiblity_manager/visiblity_manager.dart';
 
 class VisiblityManageble extends StatefulWidget {
   const VisiblityManageble({
-    super.key,
-    required this.child,
+    required super.key,
+    required this.builder,
   });
 
-  final Widget child;
+  final Widget Function() builder;
 
   @override
   State<VisiblityManageble> createState() => _VisiblityManagebleState();
 }
 
 class _VisiblityManagebleState extends State<VisiblityManageble> {
-  late void Function(double id, State volume, double total) onInit;
-  late void Function(double id) onDispose;
+  late void Function(Key key, State volume) onInit;
+  late void Function(Key key) onDispose;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _VisiblityManagebleState extends State<VisiblityManageble> {
     var manager = VisiblityNotificator.of(context);
     onInit = manager.onInit;
     onDispose = manager.onDispose;
-    //onInit(widget.id, this, widget.total);
+    onInit(widget.key!, this);
     super.didChangeDependencies();
     setState(() {});
   }
@@ -36,7 +36,7 @@ class _VisiblityManagebleState extends State<VisiblityManageble> {
   @override
   void didUpdateWidget(VisiblityManageble oldWidget) {
     super.didUpdateWidget(oldWidget);
-    //onInit(widget.id, this, widget.total);
+    onInit(widget.key!, this);
     //_total = widget.total;
     setState(() {});
   }
@@ -46,13 +46,13 @@ class _VisiblityManagebleState extends State<VisiblityManageble> {
     var manager = VisiblityNotificator.of(context);
     //_maxTotal = manager.maxStaircaseTotal;
 
-    return widget.child;
+    return widget.builder();
   }
 
   @override
   deactivate() {
     super.deactivate();
-   // onDispose(widget.id);
+    onDispose(widget.key!);
   }
 
   @override

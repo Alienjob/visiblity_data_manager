@@ -22,21 +22,21 @@ class VisiblityManager extends StatefulWidget {
   State<VisiblityManager> createState() => _VisiblityManagerState();
 }
 
-// Стейт
 class _VisiblityManagerState extends State<VisiblityManager> {
   final VisiblityStore _visiblyStore = VisiblityStore();
   Timer? _updateTimer;
 
-  void onInit(double key, State volume, double total) {
+  void onInit(Key key, State volume) {
     _visiblyStore.add(key, volume);
+    widget.onChange(widget.store, _visiblyStore);
   }
 
-  void onDispose(double key) {
+  void onDispose(Key key) {
     _visiblyStore.remove(key);
+    widget.onChange(widget.store, _visiblyStore);
   }
 
-  @override
-  void didUpdateWidget(covariant VisiblityManager oldWidget) {
+  void refresh(){
     widget.onChange(widget.store, _visiblyStore);
     _updateTimer?.cancel();
     _updateTimer = null;
@@ -45,6 +45,16 @@ class _VisiblityManagerState extends State<VisiblityManager> {
         setState(() {});
       }
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    refresh();
+    super.didChangeDependencies();
+  }
+  @override
+  void didUpdateWidget(covariant VisiblityManager oldWidget) {
+    refresh();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -54,7 +64,9 @@ class _VisiblityManagerState extends State<VisiblityManager> {
     return VisiblityNotificator(
       onInit: onInit,
       onDispose: onDispose,
+      
       store: widget.store,
+      visiblityStore: _visiblyStore,
       child: widget.child,
     );
   }
