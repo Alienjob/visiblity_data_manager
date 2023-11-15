@@ -17,14 +17,17 @@ class _NumOfVisibleState extends State<NumOfVisible> {
 
   void addItem() {
     final Key key = UniqueKey();
-    items = List<Widget>.from([...items, Card(
-      child: VisiblityManageble(
-        key: key,
-        builder: () => Text(
-          '$key ${store.numOfVisible}',
+    items = List<Widget>.from([
+      ...items,
+      Card(
+        child: VisiblityManageble(
+          key: key,
+          builder: () => Text(
+            '$key ${store.numOfVisible}',
+          ),
         ),
-      ),
-    )]);
+      )
+    ]);
     setState(() {});
   }
 
@@ -34,6 +37,15 @@ class _NumOfVisibleState extends State<NumOfVisible> {
     addItem();
   }
 
+  void onChange<int>(
+      {VisiblityCommonDataStore<int>? dataStore,
+      required VisiblityStore visiblyStore}) {
+    if (dataStore is NumOfVisibleStore) {
+      (dataStore as NumOfVisibleStore)
+          .update(visiblyStore.getVisibleKeys().length);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,13 +53,9 @@ class _NumOfVisibleState extends State<NumOfVisible> {
         appBar: AppBar(actions: [
           IconButton(onPressed: addItem, icon: const Icon(Icons.add))
         ]),
-        body: VisiblityManager(
+        body: VisiblityManagerCommonData.commonData<int>(
           store: store,
-          onChange: (dataStore, visiblyStore) {
-            if (dataStore is NumOfVisibleStore) {
-              dataStore.update(visiblyStore.getVisibleKeys().length);
-            }
-          },
+          onChange: onChange,
           child: ListView(
             children: items,
           ),

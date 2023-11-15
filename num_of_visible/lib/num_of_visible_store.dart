@@ -1,6 +1,6 @@
 import 'package:visiblity_manager/visiblity_manager.dart';
 
-class NumOfVisibleStore extends VisiblityDataStore<int> {
+class NumOfVisibleStore extends VisiblityCommonDataStore<int> {
   int numOfVisible = 0;
 
   @override

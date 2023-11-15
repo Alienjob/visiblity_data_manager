@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visiblity_manager/visiblity_manager.dart';
 
-class VisiblityNotificator extends InheritedWidget {
+class VisiblityNotificator<TValue, TCommon> extends InheritedWidget {
   VisiblityNotificator({
     super.key,
     required this.onInit,
@@ -11,9 +11,9 @@ class VisiblityNotificator extends InheritedWidget {
     required this.visiblityStore,
   });
 
-  final void Function(Key key, State volume) onInit;
+  final void Function(Key key, State state, TValue? value) onInit;
   final void Function(Key key) onDispose;
-  final VisiblityDataStore store;
+  final VisiblityCommonDataStore<TCommon>? store;
   final VisiblityStore visiblityStore;
 
   int dataVersion = 0;
@@ -31,8 +31,8 @@ class VisiblityNotificator extends InheritedWidget {
 
   @override
   bool updateShouldNotify(VisiblityNotificator oldWidget) {
-    if (dataVersion != store.version) {
-      dataVersion = store.version;
+    if (dataVersion != (store?.version??0)) {
+      dataVersion = (store?.version??0);
       return true;
     }
     if (visiblityVersion != visiblityStore.version) {

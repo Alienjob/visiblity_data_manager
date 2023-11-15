@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:visiblity_manager/visiblity_manager.dart';
 
-class VisiblityManageble extends StatefulWidget {
+class VisiblityManageble<TValue> extends StatefulWidget {
   const VisiblityManageble({
     required super.key,
-    required this.builder,
+    required this.builder, this.initValue,
   });
 
   final Widget Function() builder;
+  final TValue? initValue;
 
   @override
   State<VisiblityManageble> createState() => _VisiblityManagebleState();
 }
 
-class _VisiblityManagebleState extends State<VisiblityManageble> {
-  late void Function(Key key, State volume) onInit;
+class _VisiblityManagebleState<TValue> extends State<VisiblityManageble<TValue>> {
+  late void Function(Key key, State state, TValue? value) onInit;
   late void Function(Key key) onDispose;
+
+  late TValue? value;
 
   @override
   void initState() {
     super.initState();
-    //_total = widget.total;
+    value = widget.initValue;
   }
 
   @override
@@ -28,15 +31,15 @@ class _VisiblityManagebleState extends State<VisiblityManageble> {
     var manager = VisiblityNotificator.of(context);
     onInit = manager.onInit;
     onDispose = manager.onDispose;
-    onInit(widget.key!, this);
+    onInit(widget.key!, this, value);
     super.didChangeDependencies();
     setState(() {});
   }
 
   @override
-  void didUpdateWidget(VisiblityManageble oldWidget) {
+  void didUpdateWidget(VisiblityManageble<TValue> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    onInit(widget.key!, this);
+    onInit(widget.key!, this, value);
     //_total = widget.total;
     setState(() {});
   }

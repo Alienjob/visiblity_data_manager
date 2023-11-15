@@ -7,37 +7,35 @@ class VisiblityManager extends StatefulWidget {
   const VisiblityManager({
     super.key,
     required this.child,
-    this.updateFrequency = const Duration(milliseconds: 300),
-    required this.store,
-    required this.onChange,
+    this.updateFrequency = defaultUpdateFrequency,
   });
 
+
+  static const defaultUpdateFrequency = Duration(milliseconds: 300);
   final Widget child;
-  final VisiblityDataStore store;
   final Duration updateFrequency;
-  final void Function(VisiblityDataStore dataStore, VisiblityStore visiblyStore)
-      onChange;
 
   @override
-  State<VisiblityManager> createState() => _VisiblityManagerState();
+  State<VisiblityManager> createState() => VisiblityManagerState();
 }
 
-class _VisiblityManagerState extends State<VisiblityManager> {
+class VisiblityManagerState
+    extends State<VisiblityManager> {
   final VisiblityStore _visiblyStore = VisiblityStore();
   Timer? _updateTimer;
 
-  void onInit(Key key, State volume) {
-    _visiblyStore.add(key, volume);
-    widget.onChange(widget.store, _visiblyStore);
+  void _onInit(
+    Key key,
+    State state,
+  ) {
+    _visiblyStore.add(key, state);
   }
 
   void onDispose(Key key) {
     _visiblyStore.remove(key);
-    widget.onChange(widget.store, _visiblyStore);
   }
 
-  void refresh(){
-    widget.onChange(widget.store, _visiblyStore);
+  void refresh() {
     _updateTimer?.cancel();
     _updateTimer = null;
     _updateTimer = Timer.periodic(widget.updateFrequency, (timer) {
@@ -52,6 +50,7 @@ class _VisiblityManagerState extends State<VisiblityManager> {
     refresh();
     super.didChangeDependencies();
   }
+
   @override
   void didUpdateWidget(covariant VisiblityManager oldWidget) {
     refresh();
@@ -62,10 +61,9 @@ class _VisiblityManagerState extends State<VisiblityManager> {
   Widget build(BuildContext context) {
     _updateVisibleStrict(context);
     return VisiblityNotificator(
-      onInit: onInit,
+      onInit: (Key key, State<StatefulWidget> state, dynamic value) => _onInit(key, state),
       onDispose: onDispose,
-      
-      store: widget.store,
+      store: VisiblityCommonDataStore(),
       visiblityStore: _visiblyStore,
       child: widget.child,
     );
