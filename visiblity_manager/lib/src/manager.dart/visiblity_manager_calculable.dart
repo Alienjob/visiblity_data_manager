@@ -21,8 +21,8 @@ class VisiblityManagerCalculableData<TValue, TCommon> extends VisiblityManager {
     required Widget child,
     Duration updateFrequency = VisiblityManager.defaultUpdateFrequency,
     required VisiblityCalculableDataStore<TValue, TCommon> store,
-    required void Function({
-      VisiblityCommonDataStore<TCommon>? dataStore,
+    required void Function<TValue, TCommon>({
+      VisiblityCalculableDataStore<TValue, TCommon>? dataStore,
       required VisiblityStore visiblyStore,
     }) onChange,
   }) {
@@ -36,7 +36,7 @@ class VisiblityManagerCalculableData<TValue, TCommon> extends VisiblityManager {
   }
 
   final VisiblityCalculableDataStore<TValue, TCommon> dataStore;
-  final void Function({
+  final void Function<TValue, TCommon> ({
     VisiblityCalculableDataStore<TValue, TCommon> dataStore,
     required VisiblityStore visiblyStore,
   }) onChange;

@@ -37,8 +37,8 @@ class _NumOfVisibleState extends State<NumOfVisible> {
     addItem();
   }
 
-  void onChange<int>(
-      {VisiblityCommonDataStore<int>? dataStore,
+  void onChange<TCommon>(
+      {VisiblityCommonDataStore<TCommon>? dataStore,
       required VisiblityStore visiblyStore}) {
     if (dataStore is NumOfVisibleStore) {
       (dataStore as NumOfVisibleStore)
