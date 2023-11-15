@@ -105,10 +105,15 @@ class _VisiblityManagerCalculableDataState<TValue, TCommon>
   void _updateVisibleStrict(BuildContext context) {
     final ro = context.findRenderObject();
     if ((ro is RenderBox) && (ro.hasSize)) {
-      Offset position = ro.localToGlobal(Offset.zero);
-      Size size = ro.size;
-      _visiblyStore.minY = position.dy;
-      _visiblyStore.maxY = position.dy + size.height;
+      try {
+        Offset position = ro.localToGlobal(Offset.zero);
+        Size size = ro.size;
+        _visiblyStore.minY = position.dy;
+        _visiblyStore.maxY = position.dy + size.height;        
+      } catch (e) {
+        print('_updateVisibleStrict faild');
+      }
+
     }
   }
 

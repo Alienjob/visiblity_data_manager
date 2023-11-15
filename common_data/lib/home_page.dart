@@ -16,16 +16,21 @@ class _HomePageState extends State<HomePage> {
   final store = MaxVisibleValueStore();
 
   List<Widget> items = [];
-
+  int count = 0;
   void addItem() {
+    count++;
     double value =
-        Random().nextDouble() * 30 + RandomRoll.count + RandomRoll.count * Random().nextDouble();
+        Random().nextDouble() * 30 + count + count * Random().nextDouble();
     final Key key = ValueKey(value);
     items = List<Widget>.from([
       ...items,
-      RandomRoll(
+      VisiblityManageble(
         key: key,
-        value: value,
+        initValue: value,
+        builder: () => RandomRoll(
+          value: value,
+          maxValue: store.maxValue,
+        ),
       )
     ]);
     setState(() {});
@@ -34,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 500; i++) {
       addItem();
     }
   }
@@ -43,8 +48,9 @@ class _HomePageState extends State<HomePage> {
       {VisiblityCalculableDataStore<TValue, TCommon>? dataStore,
       required VisiblityStore visiblyStore}) {
     if (dataStore is MaxVisibleValueStore) {
-      final int? maxValue = (dataStore as MaxVisibleValueStore).calculate(visiblyStore.getVisibleKeys());
+      final double? maxValue = (dataStore as MaxVisibleValueStore).calculate(visiblyStore.getVisibleKeys());
       store.update(maxValue??0);
+      Future.delayed(Duration.zero, () async{ setState(() {});}); 
     }
   }
 
@@ -57,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             actions: [
               IconButton(onPressed: addItem, icon: const Icon(Icons.add))
             ]),
-        body: VisiblityManagerCalculableData.calculable<int, int>(
+        body: VisiblityManagerCalculableData.calculable<double, double>(
           store: store,
           onChange: onChange,
           child: ListView(

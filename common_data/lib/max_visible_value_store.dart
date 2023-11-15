@@ -3,20 +3,21 @@ import 'dart:math';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:visiblity_manager/visiblity_manager.dart';
 
-class MaxVisibleValueStore extends VisiblityCalculableDataStore<int, int> {
-  int maxValue = 0;
+class MaxVisibleValueStore extends VisiblityCalculableDataStore<double, double> {
+  double maxValue = 0;
 
   @override
-  int? calculate(List<Key> keys) {
+  double? calculate(List<Key> keys) {
     maxValue = 0;
     for (var key in keys){
       maxValue = max(maxValue, registred[key]??0);
     }
-    return super.calculate(keys);
+    super.calculate(keys);
+    return maxValue;
   }
 
   @override
-  void update(int data) {
+  void update(double data) {
     if (maxValue != data) {
       maxValue = data;
       super.update(data);

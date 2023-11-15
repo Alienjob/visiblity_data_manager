@@ -3,12 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RandomRoll extends StatefulWidget {
-  RandomRoll({super.key, required this.value}) {
-    count += 3;
-  }
+  const RandomRoll({super.key, required this.value, required this.maxValue});
 
   static int count = 0;
-  final double value;
+  final double value;  
+  final double maxValue;
 
   @override
   State<RandomRoll> createState() => _RandomRollState();
@@ -30,7 +29,7 @@ class _RandomRollState extends State<RandomRoll> {
   @override
   Widget build(BuildContext context) {
     double widthConstrain = MediaQuery.of(context).size.width;
-    double width = min(widthConstrain * widget.value / 100, widthConstrain);
+    double width = (widget.maxValue == 0)?widthConstrain:min(widthConstrain * widget.value / widget.maxValue, widthConstrain);
     return Row(
       children: [
         SizedBox(

@@ -28,11 +28,16 @@ class VisiblityStore {
         final ro = e.value.context.findRenderObject();
         if (ro != null && ro.attached) {
           if ((ro is RenderBox) && (ro.hasSize)) {
-            Offset p = ro.localToGlobal(Offset.zero);
+            try {
+                Offset p = ro.localToGlobal(Offset.zero);
             Size s = ro.size;
             if ((p.dy + s.height > minY) && (p.dy < maxY)) {
               result.add(e.key);
+            }          
+            } catch (e) {
+              print('getVisibleKeys faild');
             }
+
           }
         }
       }
