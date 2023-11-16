@@ -39,8 +39,8 @@ class _VisiblityManagebleState<TValue> extends State<VisiblityManageble<TValue>>
   @override
   void didUpdateWidget(VisiblityManageble<TValue> oldWidget) {
     super.didUpdateWidget(oldWidget);
+    value = widget.initValue;
     onInit(widget.key!, this, value);
-    //_total = widget.total;
     setState(() {});
   }
 
