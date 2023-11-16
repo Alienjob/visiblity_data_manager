@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/material.dart';
 import 'package:visiblity_manager/visiblity_manager.dart';
 
 class MaxVisibleValueStore extends VisiblityCalculableDataStore<double, double> {

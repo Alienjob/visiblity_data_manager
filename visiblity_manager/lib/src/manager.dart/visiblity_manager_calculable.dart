@@ -57,7 +57,7 @@ class _VisiblityManagerCalculableDataState<TValue, TCommon>
     TValue? value,
   ) {
     _visiblyStore.add(key, state);
-    widget.dataStore.add(key, value!);
+    widget.dataStore.add(key, value);
     widget.onChange(dataStore: widget.dataStore, visiblyStore: _visiblyStore);
   }
 
