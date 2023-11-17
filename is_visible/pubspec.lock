@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  visiblity_manager:
+    dependency: "direct main"
+    description:
+      path: "/Users/airm1/work/visiblity_manager/visiblity_manager"
+      relative: false
+    source: path
+    version: "0.0.1"
   web:
     dependency: transitive
     description:
@@ -186,3 +193,4 @@ packages:
     version: "0.1.4-beta"
 sdks:
   dart: ">=3.1.5 <4.0.0"
+  flutter: ">=1.17.0"

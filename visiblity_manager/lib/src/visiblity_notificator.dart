@@ -7,7 +7,7 @@ class VisiblityNotificator<TValue, TCommon> extends InheritedWidget {
     required this.onInit,
     required this.onDispose,
     required super.child,
-    required this.store,
+    this.store,
     required this.visiblityStore,
   });
 
