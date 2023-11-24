@@ -35,7 +35,7 @@ class VisiblityStore {
               result.add(e.key);
             }          
             } catch (e) {
-              print('getVisibleKeys faild');
+              //print('getVisibleKeys faild');
             }
 
           }

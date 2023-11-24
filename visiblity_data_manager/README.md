@@ -229,8 +229,8 @@ Wrap your Items with `VisiblityManageble`, set `initValue` use keys when creatin
 
 ## Stock exchange order book
 
-Prparing to publish
+Preparing to publish
 
 ## License
 
-This project is licensed under the MIT License. Refer to the [LICENSE](./widget_visibility_checker/LICENSE) file for more details.
+This project is licensed under the MIT License. Refer to the [LICENSE](./visibility_data_manager/LICENSE) file for more details.

@@ -46,9 +46,6 @@ class _VisiblityManagebleState<TValue> extends State<VisiblityManageble<TValue>>
 
   @override
   Widget build(BuildContext context) {
-    var manager = VisiblityNotificator.of(context);
-    //_maxTotal = manager.maxStaircaseTotal;
-
     return widget.builder();
   }
 

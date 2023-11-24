@@ -111,7 +111,7 @@ class _VisiblityManagerCalculableDataState<TValue, TCommon>
         _visiblyStore.minY = position.dy;
         _visiblyStore.maxY = position.dy + size.height;        
       } catch (e) {
-        print('_updateVisibleStrict faild');
+        //print('_updateVisibleStrict faild');
       }
 
     }

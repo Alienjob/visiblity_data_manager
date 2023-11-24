@@ -4,10 +4,10 @@ class NumOfVisibleStore extends VisiblityCommonDataStore<int> {
   int numOfVisible = 0;
 
   @override
-  void update(int num) {
-    if (numOfVisible != num) {
-      numOfVisible = num;
-      super.update(num);
+  void update(int data) {
+    if (numOfVisible != data) {
+      numOfVisible = data;
+      super.update(data);
     }
   }
 }
