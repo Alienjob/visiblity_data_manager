@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:visiblity_manager/src/visiblity_data.dart';
+import 'package:visiblity_data_manager/src/visiblity_data.dart';
 
 class VisiblityCommonDataStore<TCommon> {
   int version = 0;

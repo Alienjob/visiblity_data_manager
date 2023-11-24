@@ -176,13 +176,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  visiblity_manager:
+  visiblity_data_manager:
     dependency: "direct main"
     description:
-      path: "/Users/airm1/work/visiblity_manager/visiblity_manager"
-      relative: false
+      path: "../visiblity_data_manager"
+      relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.2"
   web:
     dependency: transitive
     description:

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:calculable_data/max_visible_value_store.dart';
 import 'package:calculable_data/random_roll.dart';
 import 'package:flutter/material.dart';
-import 'package:visiblity_manager/visiblity_manager.dart';
+import 'package:visiblity_data_manager/visiblity_data_manager.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

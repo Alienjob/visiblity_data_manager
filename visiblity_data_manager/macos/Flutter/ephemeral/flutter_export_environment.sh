@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/Users/airm1/work/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/airm1/work/visiblity_manager/visiblity_manager"
+export "FLUTTER_APPLICATION_PATH=/Users/airm1/work/visiblity_data_manager/visiblity_data_manager"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=0.0.1"

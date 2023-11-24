@@ -1,35 +1,52 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:visiblity_manager/visiblity_manager.dart';
+import 'package:visiblity_data_manager/visiblity_data_manager.dart';
 
-class VisiblityManagerIsVisible extends VisiblityManager {
-  const VisiblityManagerIsVisible._({
+class VisiblityManagerCommonData<TCommon> extends VisiblityManager {
+  const VisiblityManagerCommonData._({
     super.key,
     required super.child,
     required super.updateFrequency,
+    required this.dataStore,
+    required this.onChange,
   });
-  // manageble widget can understand if it visible
-  // use IsVisible State mixin
-  // look isVisible test case
-  static VisiblityManagerIsVisible isVisible({
+
+  // manageble widget can use common data
+  // you need to override update function for VisiblityDataStore and onChange event
+  // look num_of_visible test case
+  static VisiblityManagerCommonData<TCommon> commonData<TCommon>({
     Key? key,
     required Widget child,
     Duration updateFrequency = VisiblityManager.defaultUpdateFrequency,
+    required VisiblityCommonDataStore<TCommon> store,
+    required void Function<TCommon>({
+      VisiblityCommonDataStore<TCommon>? dataStore,
+      required VisiblityStore visiblyStore,
+    }) onChange,
   }) {
-    return VisiblityManagerIsVisible._(
+    return VisiblityManagerCommonData<TCommon>._(
       key: key,
       updateFrequency: updateFrequency,
+      dataStore: store,
+      onChange: onChange,
       child: child,
     );
   }
 
+
+  final VisiblityCommonDataStore<TCommon> dataStore;
+  final void Function<TCommon>({
+    VisiblityCommonDataStore<TCommon>? dataStore,
+    required VisiblityStore visiblyStore,
+  }) onChange;
+
   @override
-  State<VisiblityManagerIsVisible> createState() => _VisiblityManagerIsVisibleState();
+  State<VisiblityManagerCommonData> createState() => _VisiblityManagerCommonDataState();
 }
 
-class _VisiblityManagerIsVisibleState
-    extends State<VisiblityManagerIsVisible> {
+class _VisiblityManagerCommonDataState<TCommon>
+    extends State<VisiblityManagerCommonData<TCommon>> {
   final VisiblityStore _visiblyStore = VisiblityStore();
   Timer? _updateTimer;
 
@@ -38,13 +55,16 @@ class _VisiblityManagerIsVisibleState
     State state,
   ) {
     _visiblyStore.add(key, state);
+    widget.onChange(dataStore: widget.dataStore, visiblyStore: _visiblyStore);
   }
 
   void onDispose(Key key) {
     _visiblyStore.remove(key);
+    widget.onChange(dataStore: widget.dataStore, visiblyStore: _visiblyStore);
   }
 
   void refresh() {
+    widget.onChange(dataStore: widget.dataStore, visiblyStore: _visiblyStore);
     _updateTimer?.cancel();
     _updateTimer = null;
     _updateTimer = Timer.periodic(widget.updateFrequency, (timer) {
@@ -61,7 +81,7 @@ class _VisiblityManagerIsVisibleState
   }
 
   @override
-  void didUpdateWidget(covariant VisiblityManagerIsVisible oldWidget) {
+  void didUpdateWidget(covariant VisiblityManagerCommonData<TCommon> oldWidget) {
     refresh();
     super.didUpdateWidget(oldWidget);
   }
@@ -72,6 +92,7 @@ class _VisiblityManagerIsVisibleState
     return VisiblityNotificator(
       onInit: (Key key , State<StatefulWidget> state, dynamic value) => _onInit(key, state) ,
       onDispose: onDispose,
+      store: widget.dataStore,
       visiblityStore: _visiblyStore,
       child: widget.child,
     );

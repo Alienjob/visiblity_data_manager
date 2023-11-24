@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  visiblity_manager:
-    path: /Users/airm1/work/visiblity_manager/visiblity_manager
+  visiblity_data_manager:
+    path: ../visiblity_data_manager
 
 dev_dependencies:
   flutter_test:

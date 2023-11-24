@@ -1,7 +1,7 @@
-name: visiblity_manager
-description: A new Flutter package project.
-version: 0.0.1
-homepage:
+name: visiblity_data_manager
+description: Widget Visibility Tracking Across Nested Scrollable Containers.
+version: 1.0.2
+homepage: https://github.com/besharatibehzad/WidgetVisibilityChecker
 
 environment:
   sdk: '>=3.0.6 <4.0.0'

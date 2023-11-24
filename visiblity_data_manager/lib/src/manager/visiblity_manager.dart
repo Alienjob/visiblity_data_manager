@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:visiblity_manager/visiblity_manager.dart';
+import 'package:visiblity_data_manager/visiblity_data_manager.dart';
 
 class VisiblityManager extends StatefulWidget {
   const VisiblityManager({
