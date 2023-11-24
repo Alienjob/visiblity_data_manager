@@ -233,4 +233,4 @@ Preparing to publish
 
 ## License
 
-This project is licensed under the MIT License. Refer to the [LICENSE](./visibility_data_manager/LICENSE) file for more details.
+This project is licensed under the MIT License. Refer to the [LICENSE](./LICENSE) file for more details.
