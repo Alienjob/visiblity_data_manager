@@ -14,7 +14,6 @@ class _IsVisiblePageState extends State<IsVisiblePage>{
   List<Widget> items = [];
 
   void addItem() {
-    final Key key = UniqueKey();
     items = List<Widget>.from([
       ...items,
       const ItemWidget()
